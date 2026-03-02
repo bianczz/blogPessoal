@@ -1,60 +1,27 @@
 package Senai.Ipiranga.com.blogPessoal.Seguranca;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.Optional;
 
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import Senai.Ipiranga.com.blogPessoal.Model.Usuario;
+import Senai.Ipiranga.com.blogPessoal.Repository.UsuarioRepository;
 
-public class UserDetailslmpl implements UserDetails{ //userdails interface de seguranca do springboot
-		private static final long serialVersionUID = 1L; //versionamento
+@Service
+public class UserDetailsServicelmpl implements UserDetailsService{
+	
+	@Autowired
+	private UsuarioRepository userRepository;
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+		Optional<Usuario> user = userRepository.findByUsuario(username);
+		user.orElseThrow(() -> new UsernameNotFoundException(username + "not found."));
 		
-		private String userName;
-		private String password;
-		private List<GrantedAuthority> authorities;
-		
-		public UserDetailslmpl(Usuario user) { //metodo contrstutor recebendo parametro Usuario recebendo usuario e senha 
-			this.userName = user.getUsuario();
-			this.password = user.getSenha();
-		}
-
-		public UserDetailslmpl() {}//polimorfirmo de sobrecarga
-		
-		@Override
-		public Collection<? extends GrantedAuthority> getAuthorities(){
-			return authorities; //categorizaçao tipo user e admin
-		}
-		
-		@Override
-		public String getPassword() {
-			return password;
-		}
-		
-		@Override
-		public String getUsername() {
-			return userName;
-		}
-		
-		@Override
-		public boolean isAccountNonExpired() {
-			return true; //vericacao se a conta expirou
-		}
-		
-		@Override
-		public boolean isAccountNonLocked() {
-			return true; //conta bloaqueada
-		}
-		
-		@Override
-		public boolean isCredentialsNonExpired() {
-			return true; //senha expirou ou não
-		}
-		
-		@Override
-		public boolean isEnabled() {
-			return true;
-		}
-		
+		return user.map(UserDetailslmpl::new).get();
+	}
 }
