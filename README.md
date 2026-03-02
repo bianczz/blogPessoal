@@ -1,8 +1,6 @@
-# blogPessoal
+# blogPessoal API
 
-# 📝 Blog Pessoal API
-
-Esta é uma API REST robusta desenvolvida com **Spring Boot** para gerenciamento de um blog pessoal. O projeto permite o cadastro de usuários, autenticação (Login) e um sistema completo de CRUD para postagens.
+Este projeto de Back-end foi desenvolvido como parte do currículo prático do programa Ford Enter, em parceria com o SENAI. O objetivo principal foi a criação de uma API REST funcional para um blog pessoal, aplicando as melhores práticas de desenvolvimento Java com Spring Boot.
 
 ## 🚀 Tecnologias Utilizadas
 
