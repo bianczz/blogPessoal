@@ -74,5 +74,3 @@ Para testar as funcionalidades, importe as rotas no Postman:
 }
 
 ```
-
-**Gostou dessa estrutura?** Se você quiser, posso te ajudar a escrever a descrição detalhada de um endpoint específico ou criar o arquivo `JSON` de exportação do Postman para você colocar no repositório! Seria útil?
